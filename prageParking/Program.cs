@@ -30,7 +30,7 @@ namespace prageParking
             Console.WriteLine("Q) Quit");
             Console.WriteLine("Make a selection:");
 
-            switch (Console.ReadLine())
+            switch (Console.ReadLine().ToLower())
             {
                 case "1":
                     {
@@ -47,23 +47,23 @@ namespace prageParking
                         SearchVehicle();
                         return true;
                     }
-                case "Q":
-                    {
-                        Console.WriteLine("Thanks for using Prague parking assistance");
-                        Console.WriteLine("Have a nice day!");
-                        return false;
-                    }
                 case "q":
                     {
                         Console.WriteLine("Thanks for using Prague parking assistance");
                         Console.WriteLine("Have a nice day!");
                         return false;
                     }
+                //case "q":
+                //    {
+                //        Console.WriteLine("Thanks for using Prague parking assistance");
+                //        Console.WriteLine("Have a nice day!");
+                //        return false;
+                //    }
                 default:
                     {
                         return true;
                     }
-                    
+
             }
         }
 
@@ -71,56 +71,105 @@ namespace prageParking
         {
             
             Console.WriteLine("What type of vehicle do you want to park?");
-            string answer = Console.ReadLine().ToLower();
-            string car = "car";
-            string mc = "mc";
-            string mccar = car + mc;
+            //string answer = Console.ReadLine().ToLower();
+            //string car = "car";
+            //string mc = "mc";
             string regNumberCar;                                                          
             string regNumberMc;
-            if (answer == car)
+            int lenght;
+            int compare;
+            switch (Console.ReadLine().ToLower())
             {
-                Console.WriteLine("Skriv in registeringsnummer på ditt fordon");
-                regNumberCar = Console.ReadLine();
-                int lenght = regNumberCar.Length;
-                int compare = 10;
-                CompareLenghtOnString(lenght, compare);
-                Parking(regNumberCar);
-                
+                case "car":
+                    { 
+                        Console.WriteLine("Skriv in registeringsnummer på ditt fordon");
+                        regNumberCar = Console.ReadLine();
+                        lenght = regNumberCar.Length;
+                        compare = 10;
+                        CompareLenghtOnString(lenght, compare);
+                        Parking(regNumberCar);
+                        DoneParking();
+                        break;
+                    }
+                case "mc":
+                    {
+                        Console.WriteLine("Skriv in registeringsnummer på ditt fordon");
+                        regNumberMc = Console.ReadLine();
+                        lenght = regNumberMc.Length;
+                        compare = 10;
+                        CompareLenghtOnString(lenght, compare);
+                        Parking(regNumberMc);
+                        DoneParking();
+                        break;
+                    }
 
+                default:
+                    { 
+                    Console.WriteLine("Please enter (car/mc)");
+                        ParkVehicle();
+                        break;
+                    }
             }
-            if (answer == mc)
-            {
-                Console.WriteLine("Skriv in registeringsnummer på ditt fordon");
-                regNumberMc = Console.ReadLine();
-                int lenght = regNumberMc.Length;
-                int compare = 10;
-                CompareLenghtOnString(lenght, compare);
-                Parking(regNumberMc);
+            //if (answer != car)
+            //{
+            //    MainMenu();  
+            //}
+            //if  (answer == car)
+            //{
+            //Console.WriteLine("Skriv in registeringsnummer på ditt fordon");
+            //regNumberCar = Console.ReadLine();
+            //int lenght = regNumberCar.Length;
+            //int compare = 10;
+            //CompareLenghtOnString(lenght, compare);
+            //Parking(regNumberCar);
 
-            }
-            while (answer != mccar )
+
+            //}
+            //if (answer == mc)
+            //{
+            //    Console.WriteLine("Skriv in registeringsnummer på ditt fordon");
+            //    regNumberMc = Console.ReadLine();
+            //    int lenght = regNumberMc.Length;
+            //    int compare = 10;
+            //    CompareLenghtOnString(lenght, compare);
+            //    Parking(regNumberMc);
+
+            //}
+
+            //DoneParking();
+            
+            //Console.WriteLine("Har du Parkerat klart?(y/n)");
+            //    string answer1 = Console.ReadLine().ToLower() ;
+            //    string yes = "y";
+            //    string no = "n";
+            //    if(answer1 == yes)
+            //    {
+            //        MainMenu();
+            //    }
+            //    while (answer1 == no)
+            //    {
+            //        ParkVehicle();
+            //    }
+             
+
+            
+        }
+
+        private static void DoneParking()
+        {
+            Console.WriteLine("Har du Parkerat klart?(y/n)");
+            string answer = Console.ReadLine().ToLower();
+            string yes = "y";
+            string no = "n";
+            if (answer == yes)
             {
                 MainMenu();
             }
-     
-                Console.WriteLine("Har du Parkerat klart?(y/n)");
-                string answer1 = Console.ReadLine().ToLower() ;
-                string yes = "y";
-                string no = "n";
-                if(answer1 == yes)
-                {
-                    MainMenu();
-                }
-                while (answer1 == no)
-                {
-                    ParkVehicle();
+            while (answer == no)
+            {
+                ParkVehicle();
                 break;
-                    
-
-                }
-                
-
-            
+            }
         }
 
         private static void Parking(string regNumberCar)
